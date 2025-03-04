@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>软件下载</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url('../images/background .jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            display: flex;
+            min-height: 100vh;
+        }
+
+        .sidebar {
+            width: 280px;
+            background-color: rgba(255, 255, 255, 0.7);
+            box-shadow: 2px 0 5px rgba(0,0,0,0.2);
+            padding: 30px 20px;
+            margin: 20px 0 20px 20px;
+            border-radius: 16px;
+        }
+
+        .nav-item {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .nav-item:hover {
+            background-color: #e3f2fd;
+            transform: translateX(5px);
+        }
+
+        .nav-item.active {
+            background-color: #1976D2;
+        }
+
+        .nav-item.active .nav-title {
+            color: white;
+        }
+
+        .nav-item.active .logo-container {
+            border-color: white;
+        }
+
+        .logo-container {
+            width: 50px;
+            height: 50px;
+            margin-right: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid #333;
+            border-radius: 8px;
+            background-color: white;
+            transition: all 0.3s ease;
+        }
+
+        .logo-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            padding: 8px;
+        }
+
+        .nav-title {
+            font-size: 16px;
+            font-weight: bold;
+            color: #333;
+            transition: color 0.3s ease;
+        }
+
+        .main-content {
+            flex: 1;
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .software-title {
+            background-color: rgba(255, 255, 255, 0.7);
+            border-radius: 16px;
+            padding: 30px;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.2);
+            animation: fadeIn 0.3s ease;
+        }
+
+        .software-detail {
+            background-color: rgba(255, 255, 255, 0.7);
+            border-radius: 16px;
+            padding: 30px;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.2);
+            display: none;
+            animation: fadeIn 0.3s ease;
+            flex: 1;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .software-detail.active {
+            display: block;
+        }
+
+        .detail-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #eee;
+            justify-content: space-between;
+        }
+
+        .detail-header-left {
+            display: flex;
+            align-items: center;
+        }
+
+        .detail-logo {
+            width: 80px;
+            height: 80px;
+            border: 3px solid #1976D2;
+            border-radius: 12px;
+            margin-right: 20px;
+            padding: 10px;
+            background-color: white;
+        }
+
+        .detail-logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .detail-title {
+            font-size: 28px;
+            font-weight: bold;
+            color: #1976D2;
+            margin-bottom: 10px;
+        }
+
+        .detail-content {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .detail-content p {
+            font-size: 16px;
+            margin-bottom: 20px;
+        }
+
+        .detail-content ul {
+            list-style-type: none;
+            margin-bottom: 30px;
+        }
+
+        .detail-content li {
+            position: relative;
+            padding-left: 24px;
+            margin-bottom: 12px;
+            font-size: 15px;
+        }
+
+        .detail-content li:before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 8px;
+            width: 8px;
+            height: 8px;
+            background-color: #1976D2;
+            border-radius: 50%;
+        }
+
+        .download-btn {
+            display: inline-flex;
+            align-items: center;
+            background-color: #1976D2;
+            color: white;
+            padding: 14px 28px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 5px rgba(25, 118, 210, 0.2);
+        }
+
+        .download-btn:hover {
+            background-color: #1565C0;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(25, 118, 210, 0.3);
+        }
+
+        .download-btn:active {
+            transform: translateY(0);
+        }
+
+        .download-btn::before {
+            content: "⭳";
+            margin-right: 8px;
+            font-size: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <div class="nav-item active" data-software="software1">
+            <div class="logo-container">
+                <img src="images/logo1.png" alt="文件加密 Logo">
+            </div>
+            <div class="nav-title">文件加密</div>
+        </div>
+
+        <div class="nav-item" data-software="software2">
+            <div class="logo-container">
+                <img src="images/logo2.png" alt="文件查重 Logo">
+            </div>
+            <div class="nav-title">文件查重</div>
+        </div>
+
+        <div class="nav-item" data-software="software3">
+            <div class="logo-container">
+                <img src="images/logo3.png" alt="软件删除 Logo">
+            </div>
+            <div class="nav-title">软件删除</div>
+        </div>
+
+        <div class="nav-item" data-software="software4">
+            <div class="logo-container">
+                <img src="images/logo4.png" alt="软件移动 Logo">
+            </div>
+            <div class="nav-title">软件移动</div>
+        </div>
+
+        <div class="nav-item" data-software="software5">
+            <div class="logo-container">
+                <img src="images/logo5.png" alt="菜单管理 Logo">
+            </div>
+            <div class="nav-title">菜单管理</div>
+        </div>
+    </div>
+
+    <div class="main-content">
+        <div class="software-detail active" id="software1">
+            <div class="detail-header">
+                <div class="detail-header-left">
+                    <img src="images/logo1.png" alt="文件加密" class="detail-logo">
+                    <h2 class="detail-title">文件加密</h2>
+                </div>
+                <a href="https://vip.123pan.cn/1832103834/14551966" class="download-btn">立即下载</a>
+            </div>
+            <div class="detail-content">
+                <p>专业的文件加密工具，为您的敏感文件提供强大的安全保护。主要功能包括：</p>
+                <ul>
+                    <li>支持多种加密算法，确保文件安全性</li>
+                    <li>批量文件加密处理</li>
+                    <li>密码管理和恢复机制</li>
+                    <li>加密文件的权限控制</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="software-detail" id="software2">
+            <div class="detail-header">
+                <div class="detail-header-left">
+                    <img src="images/logo2.png" alt="文件查重" class="detail-logo">
+                    <h2 class="detail-title">文件查重</h2>
+                </div>
+                <a href="https://vip.123pan.cn/1832103834/14551966" class="download-btn">立即下载</a>
+            </div>
+            <div class="detail-content">
+                <p>高效的文件查重工具，帮助您快速识别和管理重复文件。主要功能包括：</p>
+                <ul>
+                    <li>快速扫描识别重复文件</li>
+                    <li>支持多种文件类型比对</li>
+                    <li>智能文件分类和筛选</li>
+                    <li>重复文件一键清理</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="software-detail" id="software3">
+            <div class="detail-header">
+                <div class="detail-header-left">
+                    <img src="images/logo3.png" alt="软件删除" class="detail-logo">
+                    <h2 class="detail-title">软件删除</h2>
+                </div>
+                <a href="https://vip.123pan.cn/1832103834/14551964" class="download-btn">立即下载</a>
+            </div>
+            <div class="detail-content">
+                <p>彻底的软件卸载工具，确保软件及其相关文件完全清除。主要功能包括：</p>
+                <ul>
+                    <li>深度扫描软件残留文件</li>
+                    <li>注册表项清理</li>
+                    <li>批量软件卸载</li>
+                    <li>强制删除顽固软件</li>
+                </ul>
+
+            </div>
+        </div>
+
+        <div class="software-detail" id="software4">
+            <div class="detail-header">
+                <div class="detail-header-left">
+                    <img src="images/logo4.png" alt="软件移动" class="detail-logo">
+                    <h2 class="detail-title">软件移动</h2>
+                </div>
+                <a href="https://vip.123pan.cn/1832103834/14551963" class="download-btn">立即下载</a>
+            </div>
+            <div class="detail-content">
+                <p>便捷的软件迁移工具，轻松实现软件位置转移。主要功能包括：</p>
+                <ul>
+                    <li>一键软件迁移</li>
+                    <li>保留软件配置和数据</li>
+                    <li>自动修复软件路径</li>
+                    <li>批量软件转移</li>
+                </ul>
+
+            </div>
+        </div>
+
+        <div class="software-detail" id="software5">
+            <div class="detail-header">
+                <div class="detail-header-left">
+                    <img src="images/logo5.png" alt="菜单管理" class="detail-logo">
+                    <h2 class="detail-title">菜单管理</h2>
+                </div>
+                <a href="https://vip.123pan.cn/1832103834/14551894" class="download-btn">立即下载</a>
+            </div>
+            <div class="detail-content">
+                <p>强大的右键菜单管理工具，优化系统右键菜单。主要功能包括：</p>
+                <ul>
+                    <li>自定义右键菜单项</li>
+                    <li>清理无效菜单项</li>
+                    <li>快捷命令添加</li>
+                    <li>菜单项优先级调整</li>
+                </ul>
+
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.querySelectorAll('.nav-item').forEach(item => {
+            item.addEventListener('click', () => {
+                // 移除所有active类
+                document.querySelectorAll('.nav-item').forEach(nav => nav.classList.remove('active'));
+                document.querySelectorAll('.software-detail').forEach(detail => detail.classList.remove('active'));
+                
+                // 添加active类到当前选中项
+                item.classList.add('active');
+                const softwareId = item.getAttribute('data-software');
+                document.getElementById(softwareId).classList.add('active');
+
+                // 平滑滚动到顶部
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
