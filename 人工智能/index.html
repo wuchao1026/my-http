@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI导航</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: url('../images/background .jpg') center/cover no-repeat fixed;
+            padding: 2rem;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 2rem;
+            font-weight: 600;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 3rem;
+            padding: 2rem;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+            box-shadow: 0 8px 32px rgba(31, 38, 135, 0.15);
+            text-decoration: none;
+            border: 1px solid rgba(255, 255, 255, 0.18);
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 40px rgba(31, 38, 135, 0.25);
+            background: rgba(255, 255, 255, 0.25);
+        }
+
+        .card img {
+            width: 140px;
+            height: 140px;
+            object-fit: contain;
+            border-radius: 16px;
+            padding: 2px;
+        }
+
+        .card-title {
+            color: #2c3e50;
+            font-size: 1.5rem;
+            font-weight: 500;
+        }
+
+        @media (max-width: 768px) {
+            .grid {
+                grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+                gap: 2rem;
+            }
+
+            .card {
+                padding: 1.5rem;
+            }
+
+            .card img {
+                width: 130px;
+                height: 130px;
+                padding: 2px;
+            }
+
+            .card-title {
+                font-size: 1.4rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="grid">
+            <a href="https://www.doubao.com" target="_blank" class="card">
+                <img src="images/doubao.png" alt="豆包">
+                <span class="card-title">豆包</span>
+            </a>
+            <a href="https://chat.openai.com" target="_blank" class="card">
+                <img src="images/chatgpt.png" alt="ChatGPT">
+                <span class="card-title">ChatGPT</span>
+            </a>
+            <a href="https://www.kimi.ai" target="_blank" class="card">
+                <img src="images/kimi.png" alt="Kimi">
+                <span class="card-title">Kimi</span>
+            </a>
+            <a href="https://trae.ai" target="_blank" class="card">
+                <img src="images/trae.png" alt="Trae">
+                <span class="card-title">Trae</span>
+            </a>
+            <a href="https://grok.com" target="_blank" class="card">
+                <img src="images/x1.png" alt="X1">
+                <span class="card-title">Grok</span>
+            </a>
+            <a href="https://chat.deepseek.com" target="_blank" class="card">
+                <img src="images/deepseek.png" alt="Deepseek">
+                <span class="card-title">Deepseek</span>
+            </a>
+            <a href="https://yiyan.baidu.com" target="_blank" class="card">
+                <img src="images/wenxin.png" alt="文心一言">
+                <span class="card-title">文心一言</span>
+            </a>
+            <a href="https://tongyi.aliyun.com" target="_blank" class="card">
+                <img src="images/tongyi.png" alt="通义千问">
+                <span class="card-title">通义千问</span>
+            </a>
+            <a href="https://txyz.ai" target="_blank" class="card">
+                <img src="images/txyz.png" alt="TXYZ">
+                <span class="card-title">TXYZ</span>
+            </a>
+        </div>
+    </div>
+</body>
+</html>

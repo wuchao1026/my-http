@@ -13,7 +13,7 @@
 
 body {
     font-family: Arial, sans-serif;
-    background-color: var(--background-color);
+    background: url('../images/background .jpg') center/cover no-repeat fixed;
     color: var(--text-color);
 }
 
@@ -25,6 +25,12 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 20px;
+    box-shadow: 0 8px 32px rgba(31, 38, 135, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.18);
 }
 
 /* 上传区域样式 */
@@ -74,17 +80,38 @@ body {
     border-radius: 8px;
     box-shadow: 0 2px 8px rgba(0,0,0,0.1);
 }
-
-/* 视频信息面板样式 */
-.video-info-panel {
+.video-info {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
     width: 100%;
-    background: white;
-    padding: 1.5rem;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
     margin-top: 1rem;
 }
 
+.info-item {
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 8px;
+    padding: 1rem;
+    text-align: center;
+}
+
+.info-item.video-name {
+    grid-column: 1 / -1;
+    margin-bottom: 1rem;
+}
+
+.info-item h4 {
+    color: var(--primary-color);
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+}
+
+.info-item p {
+    color: var(--text-color);
+    font-size: 0.85rem;
+}
 .info-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -140,11 +167,14 @@ body {
 
 /* 每秒分组样式 */
 .second-group {
-    background: white;
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
     border-radius: 8px;
     padding: 0.8rem;
     margin-bottom: 1.5rem;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    box-shadow: 0 8px 32px rgba(31, 38, 135, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.18);
 }
 
 .second-group h4 {
@@ -176,11 +206,9 @@ body {
     cursor: pointer;
     transition: transform 0.2s;
 }
-
 .frame-wrapper img:hover {
     transform: scale(1.05);
 }
-
 .frame-label {
     font-size: 0.7rem;
     color: #666;
@@ -210,67 +238,93 @@ body {
     margin: 1rem 0;
     flex-wrap: wrap;
 }
-
 .action-btn {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 80px;
-    height: 64px;
-    border: 2px solid #eee;
+    width: 140px;
+    height: 120px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
     border-radius: 12px;
-    background-color: white;
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
     padding: 0;
+    box-shadow: 0 8px 32px rgba(31, 38, 135, 0.15);
+    position: relative;
+    overflow: hidden;
 }
 
 /* 所有按钮默认状态 */
 .action-btn, .action-btn-danger {
-    background-color: white;
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
 }
-
 .action-btn .icon {
     stroke: #666;
-    transition: all 0.3s ease;
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
-
-/* 普通按钮悬停效果 */
 .action-btn:hover {
     transform: translateY(-2px);
     box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-    border-color: var(--primary-color);
-    background-color: var(--primary-color);
+    border-color: rgba(255, 255, 255, 0.3);
+    background: rgba(255, 255, 255, 0.25);
 }
-
+.action-btn:hover .icon {
+    stroke: #333;
+}
+.action-btn-danger:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+.action-btn-danger:hover .icon {
+    stroke: #dc3545;
+}
+.action-btn:hover::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255,255,255,0.2) 0%, transparent 60%);
+    transform: scale(0);
+    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
 .action-btn:hover .icon {
     stroke: white;
+    transform: scale(1.1);
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /* 危险按钮悬停效果 */
 .action-btn-danger:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-    border-color: #dc3545;
-    background-color: #dc3545;
+    transform: translateY(-8px) scale(1.05);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+    border-color: var(--primary-color);
+    background-color: var(--primary-color);
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .action-btn-danger:hover .icon {
     stroke: white;
+    transform: scale(1.1);
 }
-
 /* 禁用状态 */
 .action-btn:disabled {
-    background-color: #f5f5f5;
-    border-color: #ddd;
+    background-color: rgba(245, 245, 245, 0.5);
+    border-color: rgba(221, 221, 221, 0.5);
     cursor: not-allowed;
     transform: none;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
 }
-
 .action-btn:disabled .icon {
     stroke: #999;
 }
-
 /* 上传区域图标样式 */
 .upload-area .icon {
     width: 64px;
@@ -278,18 +332,15 @@ body {
     stroke: #666;
     margin-bottom: 1rem;
 }
-
 .upload-area:hover .icon {
     stroke: var(--primary-color);
 }
-
 /* 视频信息图标样式 */
 .info-grid .icon {
     width: 16px;
     height: 16px;
     stroke: var(--primary-color);
 }
-
 /* 模态框样式 */
 .modal {
     display: none;
@@ -300,7 +351,6 @@ body {
     height: 100%;
     background-color: rgba(0, 0, 0, 0.5);
 }
-
 .modal-content {
     background-color: white;
     margin: 10% auto;
@@ -309,7 +359,6 @@ body {
     max-width: 500px;
     position: relative;
 }
-
 .close {
     position: absolute;
     right: 1rem;
@@ -317,29 +366,24 @@ body {
     font-size: 1.5rem;
     cursor: pointer;
 }
-
 /* 提取图片选项样式 */
 .extract-options {
     margin-top: 1rem;
 }
-
 .option {
     margin-bottom: 1rem;
 }
-
 .buttons {
     display: flex;
     gap: 1rem;
     justify-content: flex-end;
 }
-
 /* 右侧面板样式 */
 .right-panel {
     display: flex;
     flex-direction: column;
     gap: 1rem;
 }
-
 .extract-controls {
     display: flex;
     align-items: center;
@@ -349,28 +393,28 @@ body {
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
-
 .extract-controls input {
     width: 80px;
     padding: 0.5rem;
     border: 1px solid #ccc;
     border-radius: 4px;
 }
-
 /* 调整图片网格容器的最大宽度 */
 .extracted-images {
     width: 100%;
     max-width: 1200px;
-    background: white;
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
     padding: 1.5rem;
     border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    box-shadow: 0 8px 32px rgba(31, 38, 135, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.18);
 }
-
 /* 图标样式 */
 .icon {
-    width: 32px;
-    height: 32px;
+    width: 48px;
+    height: 48px;
     stroke: #666;
     transition: stroke 0.3s ease;
-} 
+}

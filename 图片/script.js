@@ -56,7 +56,6 @@ function undo() {
         img.src = history[currentStep];
     }
 }
-
 // 显示图片信息
 function showImageInfo() {
     if (!currentImage) return;
@@ -188,6 +187,27 @@ function selectSecondImage() {
     };
     
     input.click();
+}
+// 删除当前图片
+function deleteCurrentImage() {
+    if (currentImage) {
+        // 清除画布
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        // 重置画布尺寸
+        canvas.width = 800;
+        canvas.height = 600;
+        // 重置当前图片
+        currentImage = null;
+        // 显示上传遮罩
+        uploadOverlay.classList.remove('hidden');
+        // 清除图片信息面板
+        const info = document.getElementById('imageInfo');
+        info.style.display = 'none';
+        info.innerHTML = '';
+        // 重置历史记录
+        history = [];
+        currentStep = -1;
+    }
 }
 
 // 裁剪功能
@@ -423,4 +443,4 @@ function flipVertical() {
         saveState();
     };
     img.src = canvas.toDataURL();
-} 
+}

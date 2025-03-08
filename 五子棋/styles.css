@@ -5,7 +5,7 @@ body {
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    background-color: #f0f0f0;
+    background: url('../images/background .jpg') center/cover no-repeat fixed;
     font-family: Arial, sans-serif;
 }
 
@@ -285,4 +285,4 @@ button:active {
     background: #ff4444;
     color: white;
     transform: rotate(90deg);
-} 
+}
