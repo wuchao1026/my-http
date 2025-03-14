@@ -13,8 +13,17 @@
             <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/>
         </svg>
         <div class="settings-menu">
+            <div class="wallpaper-switch">
+                <label>切换壁纸</label>
+                <div class="switch-slider" id="wallpaperSwitch"></div>
+            </div>
+            <div class="clock-switch">
+                <label>显示时钟</label>
+                <div class="switch-slider" id="clockSwitch"></div>
+            </div>
         </div>
     </div>
+    <div class="main-clock" id="mainClock">18:52:27</div>
     <div class="container">
         <div class="card-container">
             <a href="图片/index.html" class="card">
@@ -92,6 +101,9 @@
     <script>
         // 设置菜单交互
         const settingsButton = document.querySelector('.settings-button');
+        const wallpaperSwitch = document.getElementById('wallpaperSwitch');
+        let isWallpaper2 = false;
+
         settingsButton.addEventListener('click', function(e) {
             this.classList.toggle('active');
             e.stopPropagation();
@@ -100,6 +112,55 @@
         document.addEventListener('click', function() {
             settingsButton.classList.remove('active');
         });
+
+        // 壁纸切换功能
+        wallpaperSwitch.addEventListener('click', function(e) {
+            this.classList.toggle('active');
+            isWallpaper2 = !isWallpaper2;
+            document.body.style.backgroundImage = `url('images/background${isWallpaper2 ? '2' : ' '}.jpg')`;
+            e.stopPropagation();
+        });
+
+        // 时钟功能
+        const mainClock = document.getElementById('mainClock');
+        const clockSwitch = document.getElementById('clockSwitch');
+        let isClockVisible = false;
+
+        function updateClock() {
+            const now = new Date();
+            const hours = String(now.getHours()).padStart(2, '0');
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            const seconds = String(now.getSeconds()).padStart(2, '0');
+            mainClock.textContent = `${hours}:${minutes}:${seconds}`;
+        }
+
+        clockSwitch.addEventListener('click', function(e) {
+            this.classList.toggle('active');
+            isClockVisible = !isClockVisible;
+            mainClock.classList.toggle('show');
+            localStorage.setItem('clockVisible', isClockVisible);
+            e.stopPropagation();
+        });
+
+        // 从localStorage读取时钟设置
+        const savedClockVisible = localStorage.getItem('clockVisible') === 'true';
+        if (savedClockVisible) {
+            isClockVisible = true;
+            clockSwitch.classList.add('active');
+            mainClock.classList.add('show');
+        }
+
+        // 更新时钟
+        setInterval(updateClock, 1000);
+        updateClock();
+
+        // 从localStorage读取壁纸设置
+        const savedWallpaper = localStorage.getItem('wallpaper');
+        if (savedWallpaper === 'background2.jpg') {
+            isWallpaper2 = true;
+            wallpaperSwitch.classList.add('active');
+            document.body.style.backgroundImage = "url('images/background2.jpg')";
+        }
     </script>
 </body>
 </html>
