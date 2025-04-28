@@ -11,9 +11,12 @@ body {
 
 .game-container {
     background-color: white;
-    padding: 30px;
+    padding: 40px;
     border-radius: 15px;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
 .game-info {
